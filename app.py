@@ -160,6 +160,15 @@ css = """
     div[data-baseweb="select"] {
         text-align: center !important;
     }
+    /* Hide the top right hamburger menu and GitHub icon */
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+
+    /* Hide the "Made with Streamlit" footer at the bottom */
+    footer {visibility: hidden;}
+    
+    /* Optional: Hide the decoration bar at the very top */
+    .stDecoration {display:none !important;}
 </style>
 """
 st.markdown(css, unsafe_allow_html=True)
