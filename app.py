@@ -1,131 +1,292 @@
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
 import pandas as pd
+from streamlit_gsheets import GSheetsConnection
 
-# 1. Page Configuration
-st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
 
-# --- CUSTOM CSS ---
-st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Lora:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-    .stApp { background-color: #fdfcf0 !important; }
-    .header-arch {
-        background-color: #ffffff;
-        border-bottom-left-radius: 50% 100px;
-        border-bottom-right-radius: 50% 100px;
-        padding: 60px 20px;
-        text-align: center;
-        margin-top: -80px;
-        margin-left: -20%;
-        margin-right: -20%;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.02);
-    }
-    .names {
-        font-family: 'Playfair Display', serif;
-        font-size: 50px;
-        font-style: italic;
+#st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
+
+css = """
+<link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Bellefair&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+    .stApp { background-color: #ffffff !important; }
+
+    /* Text Colors */
+    html, body, [data-testid="stWidgetLabel"], .stMarkdown p, h1, h2, h3, span, label {
         color: #556B2F !important;
-        line-height: 1.2;
+        font-family: 'Roboto', serif !important;
     }
-    .subtitle {
-        font-family: 'Lora', serif;
-        font-size: 16px;
-        color: #808b72 !important;
-        margin-top: 20px;
-        font-style: italic;
+
+ 
+
+    .cursive-name {
+        font-family: 'Garamond';
+        font-size: 55px !important;
+        display: block;
+        color: #556B2F !important;
+        line-height: 0.8 !important;  /* Values below 1.0 pull lines closer */
+        margin-bottom: 0px !important; /* Negative margin pulls the next name UP */
     }
-    p, div, span, label, h1, h2, h3 {
-        color: #556B2F !important; 
-        font-family: 'Lora', serif;
-    }
+
+    /* INPUT FIELDS */
     .stTextInput input {
         background-color: white !important;
+        border: 1px solid #556B2F !important;
         color: #556B2F !important;
-        border: 1px solid #c2ccb5 !important;
-        border-radius: 4px !important;
-        text-align: center !important;
     }
+
+    /* BUTTONS - THE FIX */
+    /* Target every button to be outline olive */
     div.stButton > button {
         background-color: white !important;
         color: #556B2F !important;
-        border: 1px dashed #c2ccb5 !important;
-        width: 100% !important;
-        font-family: 'Lora', serif;
+        border: 1px solid #556B2F !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease;
     }
-    div.stButton > button:first-child[kind="primary"] {
-        background-color: #6b8e23 !important;
-        color: white !important;
+
+    /* Force the last button (Spremi) to be Solid Olive with White Text */
+    div.stButton:last-of-type > button {
+        background-color: #556B2F !important;
+        color: #ffffff !important;
         border: none !important;
         font-weight: bold !important;
     }
-    .stRadio > div { display: flex; justify-content: center; }
-    </style>
-    """, unsafe_allow_html=True)
 
-# --- VISUAL CONTENT ---
+    /* Force the specific label inside the button to be white */
+    div.stButton:last-of-type > button div p {
+        color: #ffffff !important;
+    }
+
+    .stRadio > div { display: flex; justify-content: center; gap: 20px; }
+    hr { border-top: 1px solid #e2e2d8 !important; }
+    
+    .quote-text {
+        font-family: 'Allura', cursive !important;
+        font-size: 32px !important;
+        color: #556B2F !important;
+        text-align: center;
+        line-height: 1.4;
+        margin: 40px 0;
+        padding: 0 20px;
+    }
+    [data-testid="stWidgetLabel"] p {
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    
+    .stButton {
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    
+    [data-testid="stMarkdownContainer"] + div[role="radiogroup"] {
+        justify-content: center !important;
+    }
+
+    
+    [data-testid="column"] > div {
+        align-items: center !important;
+    }
+    [data-testid="stWidgetLabel"] {
+    text-align: center !important;
+    justify-content: center !important;
+    display: flex !important;
+    width: 100% !important;
+    }
+    .stTextInput input {
+    text-align: center !important;
+    }
+    .stTextInput {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 450px !important; /* Matches your buttons */
+    }
+
+
+    /* 2. Center the Radio Button Options (the horizontal row) */
+    [data-testid="stHorizontalBlock"] {
+    justify-content: center !important;
+    }
+
+    /* 3. Specific fix for the Radio group container */
+    div[role="radiogroup"] {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 20px !important; /* Space between 'Dolazim' and 'Nažalost' */
+    width: 100% !important;
+    }
+
+
+    div[role="radiogroup"] label {
+    justify-content: center !important;
+    }
+    /* Style the main selectbox container */
+    div[data-baseweb="select"] > div {
+        background-color: white !important;
+        border: 1px solid #556B2F !important;
+        border-radius: 8px !important;
+        color: #556B2F !important;
+    }
+
+    /* Style the text inside the selectbox when it's closed */
+    div[data-baseweb="select"] span, div[data-baseweb="select"] div {
+        color: #556B2F !important;
+    }
+
+    /* Style the drop-down list (the menu that pops open) */
+    ul[role="listbox"] {
+        background-color: white !important;
+        border: 1px solid #556B2F !important;
+    }
+
+    /* Style the individual options inside the list */
+    li[role="option"] {
+        background-color: white !important;
+        color: #556B2F !important;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Change color when you hover over an option */
+    li[role="option"]:hover {
+        background-color: #f0f2eb !important; /* Very light olive tint on hover */
+        color: #556B2F !important;
+    }
+
+    /* Center the placeholder and selected text */
+    div[data-baseweb="select"] {
+        text-align: center !important;
+    }
+</style>
+"""
+st.markdown(css, unsafe_allow_html=True)
+
 st.markdown("""
-    <div class="header-arch">
-        <div class="names">Anđela & Marko</div>
-        <div class="subtitle">S ljubavlju Vas pozivamo da svojim prisustvom uveličate naše vjenčanje!</div>
-    </div>
+    <div>
+    	<div style="height: 15vh;"></div>
+     	<div style="color: #556B2F;margin-top: 20px; font-size: 18px; text-align: center; font-family: 'Bellefair'" >
+            POZIVAMO VAS NA NAŠE VJENČANJE 
+        </div>
+        <div style="height: 5vh;"></div>
+        <div class="cursive-name" style="text-align: left; padding-left: 7%; width: 100%";>
+        ANĐELA
+        </div>
+        <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%";>
+        & MARKO
+        </div>
+        <div style="height: 8vh;"></div>
+        <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA.2026.</div>
+        <div style="height: 5vh;"></div>
+        <div class="quote-text">"
+        Stavi me kao znak na srce,<br>
+        kao pečat na ruku svoju."
+        </div>
+        <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
+       <div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    17:30 | CRKVENO VJENČANJE
+	</div>
+	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    MARIJE MAJKE CRKVE, TRNOVČICA
+	</div>
+	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    <br>
+	</div>
+	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    20:00 | SVEČANA VEČERA
+	</div>
+	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    GASTRO GLOBUS, VELESAJAM
+	</div>
+	 <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
+	 <div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    13:30 OKUPLJANJE KOD MARKA<br>
+    14:30 OKUPLJANJE KOD ANĐELE
+	</div>
+	 <div style="height: 5vh;"></div>
+	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA
+	</div>
+	 <div style="height: 2vh;"></div>
+    
     """, unsafe_allow_html=True)
 
-st.markdown('<p style="text-align:center; font-size:28px; letter-spacing:5px; margin-top:40px; margin-bottom:0;">22 | 11 | 25</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; letter-spacing:3px; color:#808b72; font-size:12px; margin-bottom:40px;">SUBOTA</p>', unsafe_allow_html=True)
 
-st.markdown('<p style="text-align:center; font-size:14px; color:#808b72; letter-spacing:2px;">OBRED VJENČANJA</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; font-family:Playfair Display; font-size:24px; margin-bottom:0;">17:30h</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; font-size:15px; margin-bottom:40px;">📍 Župa sv. Leopolda Bogdana Mandića, Dubrava</p>', unsafe_allow_html=True)
+# Create a single column and center the content using CSS
+_, col_center, _ = st.columns([1, 6, 1])
 
-st.markdown('<p style="text-align:center; font-size:14px; color:#808b72; letter-spacing:2px;">SVEČANA VEČERA</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; font-family:Playfair Display; font-size:24px; margin-bottom:0;">20:00h</p>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; font-size:15px; margin-bottom:40px;">📍 Restoran "Gastro Globus", Zagreb</p>', unsafe_allow_html=True)
+with col_center:
+    st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+    
+   
 
-st.divider()
+    # 1. Gather Inputs
+    main_name = st.text_input("Vaše ime i prezime", placeholder="Upišite ovdje...")
 
-st.markdown('<h2 style="text-align:center; font-family:Playfair Display; font-style:italic;">Veselimo se Vašem dolasku!</h2>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; color:#808b72; font-size:14px; margin-bottom:30px;">Molimo potvrdite svoj dolazak do 08. studenog.</p>', unsafe_allow_html=True)
+    if "guests" not in st.session_state:
+        st.session_state.guests = []
 
-# --- APP LOGIC ---
-if "guest_list" not in st.session_state:
-    st.session_state.guest_list = []
-
-main_name = st.text_input("Ime i prezime", placeholder="Vaše ime i prezime", label_visibility="collapsed")
-
-for i, guest_name in enumerate(st.session_state.guest_list):
-    cols = st.columns([9, 1])
-    with cols[0]:
-        st.session_state.guest_list[i] = st.text_input(f"Gost {i+1}", value=guest_name, key=f"input_{i}", label_visibility="collapsed")
-    with cols[1]:
-        if st.button("✕", key=f"btn_{i}"):
-            st.session_state.guest_list.pop(i)
+    for i, g in enumerate(st.session_state.guests):
+        st.session_state.guests[i] = st.text_input(f"Gost {i+1}", value=g, key=f"guest_{i}")
+        if st.button(f"Ukloni gosta {i+1}", key=f"rm_{i}", use_container_width=True):
+            st.session_state.guests.pop(i)
             st.rerun()
 
-if st.button("➕ Dodaj gosta"):
-    st.session_state.guest_list.append("")
-    st.rerun()
+    if st.button("➕ Dodaj još jednu osobu", use_container_width=True):
+        st.session_state.guests.append("")
+        st.rerun()
 
-attendance = st.radio("Dolazak", ["Dolazim", "Nažalost, ne mogu doći"], horizontal=True, label_visibility="collapsed")
+    st.write("") 
 
-if st.button("Spremi!", type="primary", use_container_width=True):
-    if not main_name:
-        st.error("Molimo upišite vaše ime!")
-    else:
-        try:
-            conn = st.connection("gsheets", type=GSheetsConnection)
-            existing_data = conn.read(ttl=0)
-            new_rows = [{"Name": main_name, "Attendance": attendance, "Additional_Guests": 0, "Guest_Names": "Glavni"}]
-            if attendance == "Dolazim":
-                cleaned_extras = [g for g in st.session_state.guest_list if g.strip()]
-                for g_name in cleaned_extras:
-                    new_rows.append({"Name": g_name, "Attendance": attendance, "Additional_Guests": 0, "Guest_Names": f"Pratnja gosta: {main_name}"})
-            updated_df = pd.concat([existing_data, pd.DataFrame(new_rows)], ignore_index=True)
-            conn.update(data=updated_df)
-            st.balloons()
-            st.success("Hvala na prijavi!")
-            st.session_state.guest_list = []
-        except Exception as e:
-            st.error(f"Greška: {e}")
+    attendance = st.selectbox(
+	    "Dolazak", 
+	    ["Odaberite opciju...", "Dolazim", "Ne dolazim"],
+	    index=0,
+ 	   help=None # Keeping it clean
+	)
 
-st.caption("v1.6 Anđela Edition")
+    st.write("") 
+
+    # 2. THE SAVE LOGIC (This is the part that was missing)
+    if st.button("Spremi potvrdu", use_container_width=True):
+        if not main_name or main_name.strip() == "":
+            st.warning("Molimo unesite Vaše ime.")
+        elif attendance == "Odaberite opciju...":
+            st.warning("Molimo odaberite dolazite li.")
+        else:
+            try:
+                # Connect to Google Sheets
+                conn = st.connection("gsheets", type=GSheetsConnection)
+                
+                # Read current data (ttl=0 ensures we don't use old cached data)
+                df_existing = conn.read(ttl=0)
+                
+                # Create a list of names (Main Person + any guests with names typed in)
+                valid_guests = [g for g in st.session_state.guests if g.strip()]
+                all_guests_to_save = [main_name] + valid_guests
+                
+                # Prepare the new rows
+                new_data = []
+                for name in all_guests_to_save:
+                    new_data.append({
+                        "Name": name, 
+                        "Attendance": attendance, 
+                        "Group": main_name
+                    })
+                
+                # Combine with old data and update the sheet
+                df_new = pd.concat([df_existing, pd.DataFrame(new_data)], ignore_index=True)
+                conn.update(data=df_new)
+                
+                # Visual Feedback
+                st.success(f"Hvala Vam! Potvrda za {len(all_guests_to_save)} osoba/e je spremljena.")
+                
+                # Clear guest list for next time
+                st.session_state.guests = []
+                
+            except Exception as e:
+                st.error(f"Došlo je do pogreške pri spremanju: {e}")
+
+    st.markdown('</div>', unsafe_allow_html=True)
