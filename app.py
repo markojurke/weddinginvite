@@ -6,7 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 #st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
 
 css = """
-<link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Bellefair&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 <style>
     .stApp { background-color: #ffffff !important; }
 
@@ -19,7 +19,7 @@ css = """
  
 
     .cursive-name {
-        font-family: 'Garamond';
+        font-family: 'Forum';
         font-size: 55px !important;
         display: block;
         color: #556B2F !important;
@@ -174,9 +174,9 @@ st.markdown("""
         <div class="cursive-name" style="text-align: left; padding-left: 7%; width: 100%";>
         ANĐELA
         </div>
-        <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%";>
-        & MARKO
-        </div>
+        <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%; color: #556B2F;">
+    <span style="font-style: italic !important; margin-right: 10px;">&</span> MARKO
+	</div>
         <div style="height: 8vh;"></div>
         <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA.2026.</div>
         <div style="height: 5vh;"></div>
