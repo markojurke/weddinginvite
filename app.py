@@ -175,7 +175,7 @@ st.markdown("""
         ANĐELA
         </div>
         <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%; color: #556B2F;">
-    <span style="font-style: italic !important; margin-right: 10px;">&</span> MARKO
+    <span style="font-style: italic !important; margin-right: 10px;">&</span>MARKO
 	</div>
         <div style="height: 8vh;"></div>
         <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA.2026.</div>
@@ -203,11 +203,11 @@ st.markdown("""
 	 <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
 	 <div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     13:30 OKUPLJANJE KOD MARKA<br>
-    14:30 OKUPLJANJE KOD ANĐELE
+    &nbsp;14:30 OKUPLJANJE KOD ANĐELE
 	</div>
 	 <div style="height: 5vh;"></div>
 	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA
+    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA.
 	</div>
 	 <div style="height: 2vh;"></div>
     
