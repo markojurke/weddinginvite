@@ -187,7 +187,7 @@ st.markdown("""
     <span style="font-style: italic !important; margin-right: 10px;">&</span>MARKO
 	</div>
         <div style="height: 8vh;"></div>
-        <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA.2026.</div>
+        <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA 2026.</div>
         <div style="height: 5vh;"></div>
         <div class="quote-text">"
         Stavi me kao znak na srce,<br>
@@ -216,7 +216,7 @@ st.markdown("""
 	</div>
 	 <div style="height: 5vh;"></div>
 	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA.
+    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA
 	</div>
 	 <div style="height: 2vh;"></div>
     
