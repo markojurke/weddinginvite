@@ -6,8 +6,38 @@ from streamlit_gsheets import GSheetsConnection
 #st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
 
 css = """
-<link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 <style>
+    /* The starting state: invisible and slightly lower */
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1.0s ease-out;
+    }
+
+    /* The visible state: triggered by our script */
+    .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .cursive-name, .quote-text, .event-details, .stButton, .stTextInput {
+        animation: fadeIn 1s ease-out forwards;
+    }
+    /* Stagger the timing so they don't all pop in at once */
+    .cursive-name { animation-delay: 0s; }
+    .quote-text { animation-delay: 0s; }
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stDecoration {display:none !important;}
+    .block-container {
+        padding-top: 1rem !important; /* Changed from 6rem default to 1rem */
+        padding-bottom: 0rem !important;
+    }
     .stApp { background-color: #ffffff !important; }
 
     /* Text Colors */
@@ -61,12 +91,12 @@ css = """
     hr { border-top: 1px solid #e2e2d8 !important; }
     
     .quote-text {
-        font-family: 'Allura', cursive !important;
+        font-family: 'Kaushan Script', cursive !important;
         font-size: 32px !important;
         color: #556B2F !important;
         text-align: center;
         line-height: 1.4;
-        margin: 40px 0;
+        margin: 0 0;
         padding: 0 20px;
     }
     [data-testid="stWidgetLabel"] p {
@@ -175,8 +205,7 @@ st.markdown(css, unsafe_allow_html=True)
 
 st.markdown("""
     <div>
-    	<div style="height: 15vh;"></div>
-     	<div style="color: #556B2F;margin-top: 20px; font-size: 18px; text-align: center; font-family: 'Bellefair'" >
+     	<div style="animation: fadeIn 1s ease-in; color: #556B2F; font-size: 18px; text-align: center; font-family: 'Bellefair'" >
             POZIVAMO VAS NA NAŠE VJENČANJE 
         </div>
         <div style="height: 5vh;"></div>
@@ -184,29 +213,29 @@ st.markdown("""
         ANĐELA
         </div>
         <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%; color: #556B2F;">
-    <span style="font-style: italic !important; margin-right: 10px;">&</span>MARKO
+    <span style="font-style: italic !important; margin-right: 0px;">&</span>MARKO
 	</div>
-        <div style="height: 8vh;"></div>
-        <div style="text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA 2026.</div>
-        <div style="height: 5vh;"></div>
+        <div style="height: 12vh;"></div>
+        <div style="animation: fadeIn 1s ease-in; text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA 2026.</div>
+        <div style="height: 12vh;"></div>
         <div class="quote-text">"
         Stavi me kao znak na srce,<br>
         kao pečat na ruku svoju."
         </div>
-        <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
-       <div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+        <hr style="animation: fadeIn 1s ease-in; border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
+       <div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     17:30 | CRKVENO VJENČANJE
 	</div>
-	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     MARIJE MAJKE CRKVE, TRNOVČICA
 	</div>
 	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     <br>
 	</div>
-	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     20:00 | SVEČANA VEČERA
 	</div>
-	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
+	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
     GASTRO GLOBUS, VELESAJAM
 	</div>
 	 <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
@@ -216,7 +245,7 @@ st.markdown("""
 	</div>
 	 <div style="height: 5vh;"></div>
 	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10.LIPNJA
+    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10. LIPNJA.
 	</div>
 	 <div style="height: 2vh;"></div>
     
