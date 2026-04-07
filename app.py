@@ -202,8 +202,9 @@ css = """
 </style>
 """
 st.markdown(css, unsafe_allow_html=True)
-
+st.image("1.jpg", use_container_width=True)
 st.markdown("""
+    
     <div>
      	<div style="animation: fadeIn 1s ease-in; color: #556B2F; font-size: 18px; text-align: center; font-family: 'Bellefair'" >
             POZIVAMO VAS NA NAŠE VJENČANJE 
