@@ -6,7 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 #st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
 
 css = """
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Kaushan+Script&family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 <style>
     /* The starting state: invisible and slightly lower */
     .reveal-on-scroll {
@@ -91,7 +91,7 @@ css = """
     hr { border-top: 1px solid #e2e2d8 !important; }
     
     .quote-text {
-        font-family: 'Kaushan Script', cursive !important;
+        font-family: 'Italianno', cursive !important;
         font-size: 32px !important;
         color: #556B2F !important;
         text-align: center;
