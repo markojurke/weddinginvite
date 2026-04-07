@@ -203,54 +203,7 @@ css = """
 """
 st.markdown(css, unsafe_allow_html=True)
 st.image("1.jpg", use_container_width=True)
-st.markdown("""
-    
-    <div>
-     	<div style="animation: fadeIn 1s ease-in; color: #556B2F; font-size: 18px; text-align: center; font-family: 'Bellefair'" >
-            POZIVAMO VAS NA NAŠE VJENČANJE 
-        </div>
-        <div style="height: 5vh;"></div>
-        <div class="cursive-name" style="text-align: left; padding-left: 7%; width: 100%";>
-        ANĐELA
-        </div>
-        <div class="cursive-name" style="text-align: left; padding-left: 9%; width: 100%; color: #556B2F;">
-    <span style="font-style: italic !important; margin-right: 0px;">&</span>MARKO
-	</div>
-        <div style="height: 12vh;"></div>
-        <div style="animation: fadeIn 1s ease-in; text-align: center;color: #556B2F; font-family: 'Bellefair';font-size: 7vw">4.SRPNJA 2026.</div>
-        <div style="height: 12vh;"></div>
-        <div class="quote-text">"
-        Stavi me kao znak na srce,<br>
-        kao pečat na ruku svoju."
-        </div>
-        <hr style="animation: fadeIn 1s ease-in; border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
-       <div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    17:30 | CRKVENO VJENČANJE
-	</div>
-	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    MARIJE MAJKE CRKVE, TRNOVČICA
-	</div>
-	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    <br>
-	</div>
-	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    20:00 | SVEČANA VEČERA
-	</div>
-	<div style="animation: fadeIn 1s ease-in; text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    GASTRO GLOBUS, VELESAJAM
-	</div>
-	 <hr style="border: 0; border-top: 1px solid #e2e2d8; margin: 20px 0; width: 80%; margin-left: auto; margin-right: auto;">
-	 <div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    13:30 OKUPLJANJE KOD MARKA<br>
-    &nbsp;14:30 OKUPLJANJE KOD ANĐELE
-	</div>
-	 <div style="height: 5vh;"></div>
-	<div style="text-align:center; font-family: 'Bellefair'; font-size: 20px !important; color: #556B2F;">
-    MOLIMO VAS DA POTVRDITE SVOJ DOLAZAK NAJKASNIJE DO 10. LIPNJA.
-	</div>
-	 <div style="height: 2vh;"></div>
-    
-    """, unsafe_allow_html=True)
+
 
 
 # Create a single column and center the content using CSS
