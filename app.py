@@ -2,12 +2,25 @@ import streamlit as st
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
 
+st.set_page_config(
+    page_title="Anđela & Marko | Vjenčanje",
+    page_icon="2.jpg", # This is the tiny icon in the browser tab
+    layout="centered",
+    initial_sidebar_state="collapsed",
+)
 
 #st.set_page_config(page_title="Anđela & Marko", page_icon="💍", layout="centered")
 
 css = """
+<head>
+    <meta property="og:title" content="Anđela & Marko | 04.07.2026.">
+    <meta property="og:description" content="Pozivamo vas na naše vjenčanje!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/markojurke/weddinginvite/main/2.jpg">
+    <meta property="og:type" content="website">
+</head>
 <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Kaushan+Script&family=Zeyada&family=Bellefair&family=Forum&family=Allura&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@700&family=La+Belle+Aurore&family=Lora:ital@0;1&display=swap" rel="stylesheet">
 <style>
+    
     /* The starting state: invisible and slightly lower */
     .reveal-on-scroll {
         opacity: 0;
